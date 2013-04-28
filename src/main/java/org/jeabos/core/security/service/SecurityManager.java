@@ -48,6 +48,11 @@ public class SecurityManager {
 	}
 	
 	@Transactional(readOnly = true)
+	public List<User> getAllUser() {
+		return userDAO.getAll();
+	}
+	
+	@Transactional(readOnly = true)
 	public boolean isUserNameUnique(String newUserName, String oldUserName) {
 		return userDAO.isPropertyUnique("username", newUserName, oldUserName);
 	}
