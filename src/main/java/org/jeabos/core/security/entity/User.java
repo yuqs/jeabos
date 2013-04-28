@@ -10,6 +10,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -20,6 +22,7 @@ import org.jeabos.core.entity.IdEntity;
 @Entity
 @Table(name = "RBAC_USER")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@XmlRootElement
 public class User extends IdEntity
 {
 	private static final long serialVersionUID = 7446802057673100315L;
@@ -46,11 +49,18 @@ public class User extends IdEntity
 	
 	private String enabled;
 	
+	@XmlTransient
 	private Org org;
 
+	@XmlTransient
 	private Set<Role> roles = new HashSet<Role>();
 	
+	@XmlTransient
 	private Set<Authority> authorities = new HashSet<Authority>();
+	
+	public User() {
+		
+	}
 
 	@Column(name = "username", unique = true, nullable = false)
 	public String getUsername() {
